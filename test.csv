@@ -1,0 +1,3 @@
+day,year,month,ignoreme,measurement
+1,1998,11,some-text,3.14
+29,2020,2,text with spaces,-3281.1429
