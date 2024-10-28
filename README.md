@@ -5,3 +5,5 @@ To enable the libraries create a directory "external" and then a directory "incl
 "https://github.com/HowardHinnant/date/tree/master" (Only include date/include/date directory)
 
 Finally run "make" from root.
+
+To access datasets, go to the datasets directory and run "tar zxvf datasets.tgz".
