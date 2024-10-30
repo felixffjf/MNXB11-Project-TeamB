@@ -1,2 +1,4 @@
 [2024-10-30T10:50:15+01:00 Filter]: Calling smhicleaner.sh script
 [2024-10-30T10:50:16+01:00 Filter]: Only saving measurements taken between 1990 and 2000, writing to 1990_to_2000_filtered_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T17:40:24+01:00 Filter]: Calling smhicleaner.sh script
+[2024-10-30T17:40:24+01:00 Filter]: Only saving measurements taken between 1990 and 2000, writing to 1990_to_2000_filtered_smhi-opendata_1_162860_20231007_155220_Lulea.csv
