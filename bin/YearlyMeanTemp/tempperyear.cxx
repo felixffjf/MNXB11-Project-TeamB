@@ -8,7 +8,7 @@
 
 int main() {
     //opens the source data
-    std::ifstream inputFile("/home/stolonen/git/MNXB11-Project-TeamB/bin/CleanerAndFilter/1990_to_2000_filtered_smhi-opendata_1_162860_20231007_155220_Lulea.csv"); 
+    std::ifstream inputFile("/home/stolonen/git/MNXB11-Project-TeamB/bin/CleanerAndFilter/1970_to_2010_filtered_smhi-opendata_1_162860_20231007_155220_Lulea.csv"); 
       //create the outputfile 
     std::ofstream outputFile("mean_temperatures.csv"); 
     

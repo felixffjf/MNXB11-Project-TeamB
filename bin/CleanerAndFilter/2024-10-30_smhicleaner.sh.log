@@ -2,3 +2,11 @@
 [2024-10-30T10:50:15+01:00 Cleaner]: Finding the first line containing 'Datum'...
 [2024-10-30T10:50:15+01:00 Cleaner]: Found line 10
 [2024-10-30T10:50:15+01:00 Cleaner]: Perform cleanup in one line, result in baredata_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T14:23:47+01:00 Cleaner]: Copying input file /home/stolonen/git/MNXB11-Project-TeamB/datasets/datasets/smhi-opendata_1_162860_20231007_155220_Lulea.csv to original_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T14:23:47+01:00 Cleaner]: Finding the first line containing 'Datum'...
+[2024-10-30T14:23:47+01:00 Cleaner]: Found line 10
+[2024-10-30T14:23:47+01:00 Cleaner]: Perform cleanup in one line, result in baredata_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T14:33:40+01:00 Cleaner]: Copying input file /home/stolonen/git/MNXB11-Project-TeamB/datasets/datasets/smhi-opendata_1_162860_20231007_155220_Lulea.csv to original_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T14:33:40+01:00 Cleaner]: Finding the first line containing 'Datum'...
+[2024-10-30T14:33:40+01:00 Cleaner]: Found line 10
+[2024-10-30T14:33:40+01:00 Cleaner]: Perform cleanup in one line, result in baredata_smhi-opendata_1_162860_20231007_155220_Lulea.csv
