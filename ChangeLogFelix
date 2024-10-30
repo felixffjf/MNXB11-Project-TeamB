@@ -1,0 +1,7 @@
+28/10 - Made repo as copy of template provided
+
+30/10 - Made a copy of Sofia's 10 year filter and adjusted it to filter all data between 1950-2023
+      - Wrote c++ code which plots the difference between the highest and lowest temperature of each year.
+      - Adjusted code to make sure the scaling is correct 
+      - Made sure any file could be put in and plot given a unique name
+      - Added trendline
