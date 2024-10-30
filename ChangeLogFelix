@@ -5,3 +5,6 @@
       - Adjusted code to make sure the scaling is correct 
       - Made sure any file could be put in and plot given a unique name
       - Added trendline
+      - Further adjusted bash script to name the output filtered file name to simply be the city name.
+      - Wrote a makefile which immediately finds the wanted data, filters it and then makes the plots.
+      - Adjusted the makefile so it also opens the tarball

@@ -1,39 +1,59 @@
-# Set the compiler to g++
-CXX := g++
+# Compiler settings
+CXX = g++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++17 `root-config --cflags --libs`
 
-# Compiler warnings, optimizations, and C++ standard
-CXXWARNINGS := -Wall -Wextra -Werror
-CXXOPT := -O3
-CXXSTD := -std=c++17
+# Paths
+FILTER_SCRIPT = ~/MNXB11-Project-TeamB/bin/CleanerAndFilter/filter1950-2023.sh
+DATASETS_DIR = ~/MNXB11-Project-TeamB/datasets
+DATASETS_TGZ = $(DATASETS_DIR)/datasets.tgz
 
-ROOTINC := $(shell root-config --incdir)
-ROOTLIBS := $(shell root-config --glibs)
+# Source and executable for the plotting program
+PLOT_PROGRAM_SRC = yearly_temp_difference.cxx
+PLOT_PROGRAM_EXE = yearly_temp_difference
 
+# Input CSV files in the datasets directory (will be created by extracting datasets.tgz)
+LULEA_CSV = $(DATASETS_DIR)/smhi-opendata_1_162860_20231007_155220_Lulea.csv
+LUND_CSV = $(DATASETS_DIR)/smhi-opendata_1_53430_20231007_155558_Lund.csv
 
-# Include directories
-INCLUDES := -I include -I external/include -I$(ROOTINC) # Include CLI11 headers
+# Output filenames after filtering
+LULEA_FILTERED = Lulea
+LUND_FILTERED = Lund
 
-# Compiler flags
-CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES)
+# Plot output files
+LULEA_PLOT = YearlyTemperatureDifference_Lulea.png
+LUND_PLOT = YearlyTemperatureDifference_Lund.png
 
-# Linker flags (empty for now, but can be used for future libraries)
-LDFLAGS := $(ROOTLIBS)
+# Default target
+all: $(LULEA_PLOT) $(LUND_PLOT)
 
-# Phony target so 'make clean' works without considering it a real file
-.PHONY: all clean
+# Step to extract datasets if they aren't already extracted
+extract_datasets:
+	tar zxvf $(DATASETS_TGZ) -C $(DATASETS_DIR)
 
-# Target to build the main executable
-all: main
+# Ensure that every target depends on the extracted datasets
+$(LULEA_CSV): extract_datasets
+$(LUND_CSV): extract_datasets
 
-# Link main.cxx with object files (add other object files as needed)
-main: main.cxx
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+# Compile the plotting program if it hasn't been compiled already
+$(PLOT_PROGRAM_EXE): $(PLOT_PROGRAM_SRC)
+	$(CXX) $(CXXFLAGS) -o $(PLOT_PROGRAM_EXE) $(PLOT_PROGRAM_SRC)
 
-# Rule to build object files from .cxx files in src/
-src/%.o: src/%.cxx
-	$(CXX) $(CXXFLAGS) $^ -c -o $@
+# Rule to apply the filter script to the Lulea dataset
+$(LULEA_FILTERED): $(FILTER_SCRIPT) $(LULEA_CSV)
+	bash $(FILTER_SCRIPT) $(LULEA_CSV)
 
-# Clean up generated object files and executables
+# Rule to apply the filter script to the Lund dataset
+$(LUND_FILTERED): $(FILTER_SCRIPT) $(LUND_CSV)
+	bash $(FILTER_SCRIPT) $(LUND_CSV)
+
+# Rule to generate the plot from the Lulea filtered file
+$(LULEA_PLOT): $(LULEA_FILTERED) $(PLOT_PROGRAM_EXE)
+	./$(PLOT_PROGRAM_EXE) $(LULEA_FILTERED)
+
+# Rule to generate the plot from the Lund filtered file
+$(LUND_PLOT): $(LUND_FILTERED) $(PLOT_PROGRAM_EXE)
+	./$(PLOT_PROGRAM_EXE) $(LUND_FILTERED)
+
+# Clean up all generated files
 clean:
-	rm -v src/*.o main
-
+	rm -f $(LULEA_PLOT) $(LUND_PLOT) $(LULEA_FILTERED) $(LUND_FILTERED) $(PLOT_PROGRAM_EXE)
