@@ -1,0 +1,9 @@
+[2024-10-30T13:09:13+01:00 Cleaner]: Copying input file datasets/smhi-opendata_1_162860_20231007_155220_Lulea.csv to original_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T13:10:01+01:00 Cleaner]: Copying input file /home/felixffjf/MNXB11-Project-TeamB/datasets/smhi-opendata_1_162860_20231007_155220_Lulea.csv to original_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T13:10:01+01:00 Cleaner]: Finding the first line containing 'Datum'...
+[2024-10-30T13:10:01+01:00 Cleaner]: Found line 10
+[2024-10-30T13:10:01+01:00 Cleaner]: Perform cleanup in one line, result in baredata_smhi-opendata_1_162860_20231007_155220_Lulea.csv
+[2024-10-30T13:53:38+01:00 Cleaner]: Copying input file /home/felixffjf/MNXB11-Project-TeamB/datasets/smhi-opendata_1_53430_20231007_155558_Lund.csv to original_smhi-opendata_1_53430_20231007_155558_Lund.csv
+[2024-10-30T13:53:38+01:00 Cleaner]: Finding the first line containing 'Datum'...
+[2024-10-30T13:53:38+01:00 Cleaner]: Found line 13
+[2024-10-30T13:53:38+01:00 Cleaner]: Perform cleanup in one line, result in baredata_smhi-opendata_1_53430_20231007_155558_Lund.csv
