@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17 `root-config --cflags --libs`
 
 # Paths
-FILTER_SCRIPT = bin/CleanerAndFilter/filter1950-2023.sh
+FILTER_SCRIPT = src/CleanerAndFilter/filter1950-2023.sh
 DATASETS_DIR =  datasets
 DATASETS_TGZ = $(DATASETS_DIR)/datasets.tgz
 
@@ -12,8 +12,8 @@ PLOT_PROGRAM_SRC = yearly_temp_difference.cxx
 PLOT_PROGRAM_EXE = yearly_temp_difference
 
 # Source and executable for the plotting program FOR MEANTEMP
-PLOT_PROGRAM_MEAN_SRC = bin/YearlyMeanTemp/tempperyear.cxx
-PLOT_PROGRAM_MEAN_EXE = bin/YearlyMeanTemp/tempperyear
+PLOT_PROGRAM_MEAN_SRC = src/YearlyMeanTemp/tempperyear.cxx
+PLOT_PROGRAM_MEAN_EXE = src/YearlyMeanTemp/tempperyear
 
 # Input CSV files in the datasets directory (will be created by extracting datasets.tgz)
 LULEA_CSV = $(DATASETS_DIR)/smhi-opendata_1_162860_20231007_155220_Lulea.csv
@@ -41,8 +41,6 @@ extract_datasets:
 # Ensure that every target depends on the extracted datasets
 $(LULEA_CSV): extract_datasets
 $(LUND_CSV): extract_datasets
-
-
 
 
 
