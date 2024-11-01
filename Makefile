@@ -8,8 +8,8 @@ DATASETS_DIR =  datasets
 DATASETS_TGZ = $(DATASETS_DIR)/datasets.tgz
 
 # Source and executable for the plotting program
-PLOT_PROGRAM_SRC = yearly_temp_difference.cxx
-PLOT_PROGRAM_EXE = yearly_temp_difference
+PLOT_PROGRAM_SRC = src/TempDifference/yearly_temp_difference.cxx
+PLOT_PROGRAM_EXE = src/TempDifference/yearly_temp_difference
 
 # Source and executable for the plotting program FOR MEANTEMP
 PLOT_PROGRAM_MEAN_SRC = src/YearlyMeanTemp/tempperyear.cxx
