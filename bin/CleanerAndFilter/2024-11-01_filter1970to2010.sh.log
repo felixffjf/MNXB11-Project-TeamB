@@ -1,2 +1,0 @@
-[2024-11-01T16:16:29+01:00 Filter]: Calling smhicleaner.sh script
-[2024-11-01T16:16:29+01:00 Filter]: Only saving measurements taken between 1970 and 2010, writing to 1970_to_2010_filtered_smhi-opendata_1_53430_20231007_155558_Lund.csv
