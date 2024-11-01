@@ -11,7 +11,6 @@
 #include <TLegend.h>
 #include <TStyle.h>
 
-
 int main() {
     //opens the source data
     std::ifstream inputFile("/home/stolonen/git/MNXB11-Project-TeamB/bin/CleanerAndFilter/1970_to_2010_filtered_smhi-opendata_1_162860_20231007_155220_Lulea.csv"); 
@@ -67,7 +66,6 @@ int main() {
     hist->SetLineWidth(2); // Outline width
     hist->SetFillColor(7); 
     hist->SetFillStyle(3001);
-
 
     //Fill the histogram
     for (const auto& [year, meanTemp]: meanTemperatures) {
