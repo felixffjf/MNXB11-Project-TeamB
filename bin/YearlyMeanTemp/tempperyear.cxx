@@ -8,6 +8,7 @@
 #include <TH1F.h>
 #include <TCanvas.h>
 #include <TF1.h>
+#include <filesystem>  
 #include <TLegend.h>
 #include <TStyle.h>
 #include <TLatex.h>
@@ -48,8 +49,12 @@ int main(int argc, char* argv[]) {
         int year = std::stoi(date.substr(0, 4)); 
         //converts the temp string to a double
         double temperature = std::stod(temp);
-        //appends the temperature to the vector of temperatureData
-        temperatureData[year].push_back(temperature);
+
+        // Only append data for years 1970 to 2010
+        if (year >= 1970 && year <= 2010) {
+            //appends the temperature to the vector of temperatureData
+            temperatureData[year].push_back(temperature);
+        }
     }
     
     // Map to store the mean temperature for each year
@@ -124,7 +129,11 @@ int main(int argc, char* argv[]) {
     latex->Draw(); 
 
     //save plot as a png
-    c1->SaveAs("MeanTempOverYears.png");
-    std::cout << "Plot saved as: MeanTempOverYears.png" << std::endl;
+    std::string inputPath = argv[1];
+    std::string fileName = std::filesystem::path(inputPath).stem().string();
+    std::string outputFile = "YearlyMeanTemp_" + fileName + ".png";
+    c1->SaveAs(outputFile.c_str());
+    
+    std::cout << "Plot saved as: " << outputFile << std::endl;
 
 }
