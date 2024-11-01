@@ -29,6 +29,10 @@ int main(int argc, char* argv[]) {
         return 1; 
     }
 
+    // added so that the cityname can be used
+    std::string inputPath = argv[1];
+    std::string fileName = std::filesystem::path(inputPath).stem().string();
+
     //make variable line as a string to store each row
     std::string line; 
 
@@ -51,7 +55,7 @@ int main(int argc, char* argv[]) {
         double temperature = std::stod(temp);
 
         // Only append data for years 1970 to 2010
-        if (year >= 1970 && year <= 2010) {
+        if (year >= 1965 && year <= 2000) {
             //appends the temperature to the vector of temperatureData
             temperatureData[year].push_back(temperature);
         }
@@ -91,8 +95,8 @@ int main(int argc, char* argv[]) {
     TCanvas *c1 = new TCanvas("c1", "Mean Temperature Histogram", 800, 600);
     
     // Create a histogram
-    TH1F *hist = new TH1F("hist", "Mean Temperature by Year;Year;Mean Temperature (Celsius)", yearCounter, 1970, 2011);
-    
+    TH1F *hist = new TH1F("hist", ("Mean temperature per year in " + fileName).c_str(), yearCounter, 1965, 2001);
+
     // Set histogram appearance
     hist->SetStats(0);
     hist->SetLineColor(9); // Outline color
@@ -109,7 +113,7 @@ int main(int argc, char* argv[]) {
     hist->Draw("HIST"); 
 
     // Create a linear fit function
-    TF1 *fitFunction = new TF1("fitFunction", "pol1", 1970, 2010);
+    TF1 *fitFunction = new TF1("fitFunction", "pol1", 1965, 2001);
     hist->Fit(fitFunction, "R"); // "R" for range; fits within the range of the histogram
     
     // Set the color and line style for the fit function
@@ -119,7 +123,7 @@ int main(int argc, char* argv[]) {
     // Draw the fit function on the histogram
     fitFunction->Draw("SAME"); // Draw on the same canvas
     
-
+    
     // Create a text box to display the overall mean
     std::ostringstream textbox;
     textbox << "Overall mean temperature: " << std::setprecision(3)<< overallMean << " C";
@@ -129,8 +133,6 @@ int main(int argc, char* argv[]) {
     latex->Draw(); 
 
     //save plot as a png
-    std::string inputPath = argv[1];
-    std::string fileName = std::filesystem::path(inputPath).stem().string();
     std::string outputFile = "YearlyMeanTemp_" + fileName + ".png";
     c1->SaveAs(outputFile.c_str());
     
