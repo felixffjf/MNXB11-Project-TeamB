@@ -43,8 +43,13 @@ $(LULEA_CSV): extract_datasets
 $(LUND_CSV): extract_datasets
 
 
+# Input CSV files in the datasets directory (will be created by extracting datasets.tgz)
+LULEA_CSV = $(DATASETS_DIR)/smhi-opendata_1_162860_20231007_155220_Lulea.csv
+LUND_CSV = $(DATASETS_DIR)/smhi-opendata_1_53430_20231007_155558_Lund.csv
 
-############# FOR MIN VS MAX TEMP TEST ##############
+
+
+############# FOR TEMP DIFFERENCE TEST ##############
 
 # Compile the plotting program if it hasn't been compiled already
 $(PLOT_PROGRAM_EXE): $(PLOT_PROGRAM_SRC)
@@ -70,6 +75,8 @@ $(LUND_PLOT): $(LUND_FILTERED) $(PLOT_PROGRAM_EXE)
 
 ##### FOR YEARLY MEAN TEMP TEST ##################
 
+
+
 # Compile the plotting program if it hasn't been compiled already
 $(PLOT_PROGRAM_MEAN_EXE): $(PLOT_PROGRAM_MEAN_SRC)
 	$(CXX) $(CXXFLAGS) -o $(PLOT_PROGRAM_MEAN_EXE) $(PLOT_PROGRAM_MEAN_SRC)
@@ -81,10 +88,6 @@ $(LULEA_MEAN_PLOT): $(LULEA_FILTERED) $(PLOT_PROGRAM_MEAN_EXE)
 # Rule to generate the plot from the Lund filtered file
 $(LUND_MEAN_PLOT): $(LUND_FILTERED) $(PLOT_PROGRAM_MEAN_EXE)
 	./$(PLOT_PROGRAM_MEAN_EXE) $(LUND_FILTERED)
-
-
-
-
 
 
 # Clean up all generated files
