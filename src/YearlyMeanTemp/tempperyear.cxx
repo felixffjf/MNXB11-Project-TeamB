@@ -93,16 +93,16 @@ int main(int argc, char* argv[]) {
     inputFile.close();
 
     // Create a canvas to draw the histogram
-    TCanvas *c1 = new TCanvas("c1", "Mean Temperature Histogram", 800, 600);
+    TCanvas *c1 = new TCanvas("c1", "Average Temperature Histogram", 800, 600);
     
     // Create a histogram
-    TH1F *hist = new TH1F("hist", ("Mean temperature per year in " + fileName).c_str(), yearCounter, 1965, 2001);
+    TH1F *hist = new TH1F("hist", ("Average temperature per year in " + fileName).c_str(), yearCounter, 1965, 2001);
 
     // Set histogram appearance
     hist->SetStats(0);
-    hist->SetLineColor(9); // Outline color
+    hist->SetLineColor(32); // Outline color
     hist->SetLineWidth(2); // Outline width
-    hist->SetFillColor(7); 
+    hist->SetFillColor(31); 
     hist->SetFillStyle(3001);
     //hist->GetYaxis()->SetRangeUser(-1,overallMean+4);
 
@@ -119,26 +119,39 @@ int main(int argc, char* argv[]) {
     // Create a quadratic fit function
     TF1 *fitFunction = new TF1("fitFunction", "pol2", 1965, 2001);
     hist->Fit(fitFunction, "R"); // "R" for range; fits within the range of the histogram
-    
     // Set the color and line style for the fit function
-    fitFunction->SetLineColor(2); // Red color for the fit
+    fitFunction->SetLineColor(860); // Red color for the fit
     fitFunction->SetLineWidth(2);
-    
     // Draw the fit function on the histogram
     fitFunction->Draw("SAME"); // Draw on the same canvas
 
     // Create a text box to display the overall mean
     std::ostringstream textbox;
-    textbox << "Overall mean temperature: " << std::setprecision(3)<< overallMean << " C";
+    textbox << "Overall average temperature: " << std::setprecision(3)<< overallMean << " C";
     TLatex *latex = new TLatex(1980, hist->GetMaximum(), textbox.str().c_str());
     latex->SetTextColor(1); 
     latex->SetTextSize(0.03);
     latex->Draw(); 
 
+
+    ////// make a moving average
+
+    auto graph {new TGraph()};
+    for(int bin = 1; bin < hist->GetNbinsX(); ++bin) {
+        graph->Expand(graph->GetN() + 1, 100);
+        double sumpoints = 0.0;
+        sumpoints = hist->GetBinContent(bin) + hist->GetBinContent(bin+1) + hist->GetBinContent(bin+2);
+        graph->SetPoint(graph->GetN(), hist->GetBinCenter(bin+1), (sumpoints/3));
+    }
+    graph->SetLineColor(616);
+    graph->SetLineWidth(2);
+    graph->Draw("SAME C");
+    
     // Create a legend
     TLegend *legend = new TLegend(0.1, 0.8, 0.3, 0.9); 
-    legend->AddEntry(hist, "Mean Temperature", "f"); 
+    legend->AddEntry(hist, "Average temperature", "f"); 
     legend->AddEntry(fitFunction, "Quadratic fit", "l"); 
+    legend->AddEntry(graph, "Moving average", "l"); 
     legend->Draw();
     
     //save plot as a png
