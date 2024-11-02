@@ -12,6 +12,7 @@
 #include <TLegend.h>
 #include <TStyle.h>
 #include <TLatex.h>
+#include <TGraph.h>
 
 int main(int argc, char* argv[]) {
     //check for two arguments, code-name and csv file
@@ -103,6 +104,7 @@ int main(int argc, char* argv[]) {
     hist->SetLineWidth(2); // Outline width
     hist->SetFillColor(7); 
     hist->SetFillStyle(3001);
+    //hist->GetYaxis()->SetRangeUser(-1,overallMean+4);
 
     //Fill the histogram
     for (const auto& [year, meanTemp]: meanTemperatures) {
@@ -112,8 +114,10 @@ int main(int argc, char* argv[]) {
     // Draw the histogram
     hist->Draw("HIST"); 
 
-    // Create a linear fit function
-    TF1 *fitFunction = new TF1("fitFunction", "pol1", 1965, 2001);
+
+
+    // Create a quadratic fit function
+    TF1 *fitFunction = new TF1("fitFunction", "pol2", 1965, 2001);
     hist->Fit(fitFunction, "R"); // "R" for range; fits within the range of the histogram
     
     // Set the color and line style for the fit function
@@ -122,16 +126,21 @@ int main(int argc, char* argv[]) {
     
     // Draw the fit function on the histogram
     fitFunction->Draw("SAME"); // Draw on the same canvas
-    
-    
+
     // Create a text box to display the overall mean
     std::ostringstream textbox;
     textbox << "Overall mean temperature: " << std::setprecision(3)<< overallMean << " C";
-    TLatex *latex = new TLatex(1972, hist->GetMaximum(), textbox.str().c_str());
+    TLatex *latex = new TLatex(1980, hist->GetMaximum(), textbox.str().c_str());
     latex->SetTextColor(1); 
     latex->SetTextSize(0.03);
     latex->Draw(); 
 
+    // Create a legend
+    TLegend *legend = new TLegend(0.1, 0.8, 0.3, 0.9); 
+    legend->AddEntry(hist, "Mean Temperature", "f"); 
+    legend->AddEntry(fitFunction, "Quadratic fit", "l"); 
+    legend->Draw();
+    
     //save plot as a png
     std::string outputFile = "YearlyMeanTemp_" + fileName + ".png";
     c1->SaveAs(outputFile.c_str());
