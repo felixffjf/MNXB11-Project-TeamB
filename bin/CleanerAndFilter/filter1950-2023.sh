@@ -55,6 +55,7 @@ log(){
 ###### Functions END ###################################################
 
 # Path to shmicleaner.sh
+
 SMHICLEANER_PATH="/home/felixffjf/MNXB11-Project-TeamB/bin/CleanerAndFilter/smhicleaner.sh"
 
 # Exit immediately if the shmicleaner.sh script is not found
