@@ -15,6 +15,10 @@ PLOT_PROGRAM_EXE = src/TempDifference/yearly_temp_difference
 PLOT_PROGRAM_MEAN_SRC = src/YearlyMeanTemp/tempperyear.cxx
 PLOT_PROGRAM_MEAN_EXE = src/YearlyMeanTemp/tempperyear
 
+# Source and executable for the plotting program FOR MIDSOMMAR
+PLOT_PROGRAM_MIDDSOMAR_SRC = src/MidsommarTemp/midsommar_temp_diff.cxx
+PLOT_PROGRAM_MIDDSOMAR_EXE = src/MidsommarTemp/midsommar_temp_diff
+
 # Input CSV files in the datasets directory (will be created by extracting datasets.tgz)
 LULEA_CSV = $(DATASETS_DIR)/smhi-opendata_1_162860_20231007_155220_Lulea.csv
 LUND_CSV = $(DATASETS_DIR)/smhi-opendata_1_53430_20231007_155558_Lund.csv
@@ -31,8 +35,12 @@ LUND_PLOT = YearlyTemperatureDifference_Lund.png
 LULEA_MEAN_PLOT = YearlyMeanTemp_Lulea.png
 LUND_MEAN_PLOT = YearlyMeanTemp_Lund.png
 
+# Plot output files FOR MIDDSOMAR
+LULEA_MID_PLOT = MidsommarTemp_Lulea.png
+LUND_MID_PLOT = MidsommarTemp_Lund.png
+
 # Default target
-all: $(LULEA_PLOT) $(LUND_PLOT) $(LULEA_MEAN_PLOT) $(LUND_MEAN_PLOT)
+all: $(LULEA_PLOT) $(LUND_PLOT) $(LULEA_MEAN_PLOT) $(LUND_MEAN_PLOT) $(LULEA_MID_PLOT) $(LUND_MID_PLOT)
 
 # Step to extract datasets if they aren't already extracted
 extract_datasets:
@@ -89,6 +97,23 @@ $(LULEA_MEAN_PLOT): $(LULEA_FILTERED) $(PLOT_PROGRAM_MEAN_EXE)
 $(LUND_MEAN_PLOT): $(LUND_FILTERED) $(PLOT_PROGRAM_MEAN_EXE)
 	./$(PLOT_PROGRAM_MEAN_EXE) $(LUND_FILTERED)
 
+
+
+##### FOR YEARLY MIDDSOMAR TEMP TEST ##################
+
+
+
+# Compile the plotting program if it hasn't been compiled already
+$(PLOT_PROGRAM_MIDDSOMAR_EXE): $(PLOT_PROGRAM_MIDDSOMAR_SRC)
+	$(CXX) $(CXXFLAGS) -o $(PLOT_PROGRAM_MIDDSOMAR_EXE) $(PLOT_PROGRAM_MIDDSOMAR_SRC)
+
+# Rule to generate the plot from the Lulea filtered file
+$(LULEA_MID_PLOT): $(LULEA_FILTERED) $(PLOT_PROGRAM_MIDDSOMAR_EXE)
+	./$(PLOT_PROGRAM_MIDDSOMAR_EXE) $(LULEA_FILTERED)
+
+# Rule to generate the plot from the Lund filtered file
+$(LUND_MID_PLOT): $(LUND_FILTERED) $(PLOT_PROGRAM_MIDDSOMAR_EXE)
+	./$(PLOT_PROGRAM_MIDDSOMAR_EXE) $(LUND_FILTERED)
 
 # Clean up all generated files
 clean:
