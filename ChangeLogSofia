@@ -1,0 +1,21 @@
+Change log
+
+29/10: Make bin folder and added the shmi cleaner and filterfor10years.sh to it. 
+
+30/11: Wrote tempperyear.cxx to produce file with mean temperatures per year
+
+30/11: Wrote plotyearlymeantemp.cxx
+
+30/11: Made new filter for between 1970 to 2010
+
+30/10: Added a linear fit 
+
+1/11: Combine the two codes, tempperyear and plotyearlytemp into one code. Changed so that the new code can be run by inputting the source data in the terminal 
+
+1/11: Made it possible to run code by make command 
+
+1/11: Changed linear fit to a quadratic 
+
+1/ 11: Moved all codes into the directory src (source code) instead of in bin and other places 
+
+2/11: Made a moving average graph on top of the existing histogram and fit function
