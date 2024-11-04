@@ -2,11 +2,6 @@
 
 This project has been made as a part of the course MNXB11. The goal of the project is to use all the knowladge of GitHub and C++ together with Bash and Root as out filtering and graphing tools respectfully.
 
-In order to get started a few libraries need to be added to the repository. To enable the libraries create a directory "external" and then a directory "include" within that directory. Then clone the following into external/include/
-"https://github.com/ben-strasser/fast-cpp-csv-parser.git" 
-"https://github.com/CLIUtils/CLI11.git" 
-"https://github.com/HowardHinnant/date/tree/master" (Only include date/include/date directory)
-
 This project has been made with "user-friendliness" in mind, meaning it was made as a well rounded package. It is very simple to use, the only command needed to run is
 
 ```console
